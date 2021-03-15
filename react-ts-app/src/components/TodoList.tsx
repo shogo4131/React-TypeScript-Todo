@@ -1,10 +1,15 @@
 import React, { FC, useState, useEffect } from 'react';
 import { Box, Card } from '@material-ui/core';
 import TodoItems from './TodoItems';
-import dummyData from '../dummyData/todo.json';
 
-const TodoList = () => {
-  const [todo, setTodo] = useState(dummyData);
+const TodoList: FC = () => {
+  const [todo, setTodo] = useState([]);
+
+  useEffect(() => {
+    const response = require('../dummyData/todo.json');
+
+    setTodo(response);
+  }, []);
 
   return (
     <Box mt={10}>
