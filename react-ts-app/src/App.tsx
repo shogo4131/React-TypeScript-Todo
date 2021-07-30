@@ -1,13 +1,14 @@
-import React, { FC, Fragment } from 'react';
-import Header from './components/Header';
-import TodoList from './components/TodoList';
+import React from 'react';
+import { Header } from 'components/Header/index';
 
-const App: FC = () => {
+import TodoList from './components/Todo/Todo';
+
+const App: React.VFC = () => {
   return (
-    <Fragment>
+    <>
       <Header />
       <TodoList />
-    </Fragment>
+    </>
   );
 };
 

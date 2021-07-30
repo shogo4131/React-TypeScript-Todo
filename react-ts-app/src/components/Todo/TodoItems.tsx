@@ -1,14 +1,14 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Grid, Button } from '@material-ui/core';
-import { Todo } from '../Type';
+import { Todo } from '../../types/Type';
 
 type TodoListProps = {
   todoItems: Todo;
 };
 
-const TodoItems: FC<TodoListProps> = ({ todoItems }) => {
+const TodoItems: React.VFC<TodoListProps> = ({ todoItems }) => {
   return (
-    <Grid container justify="center" spacing={10}>
+    <Grid container spacing={10}>
       <Grid item>{todoItems.todo}</Grid>
       <Grid item>
         <Grid container spacing={2}>

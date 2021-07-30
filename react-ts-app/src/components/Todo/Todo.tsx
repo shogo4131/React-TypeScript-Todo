@@ -1,12 +1,12 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Card } from '@material-ui/core';
 import TodoItems from './TodoItems';
 
-const TodoList: FC = () => {
+const Todo: React.VFC = () => {
   const [todo, setTodo] = useState([]);
 
   useEffect(() => {
-    const response = require('../dummyData/todo.json');
+    const response = require('../../dummyData/todo.json');
 
     setTodo(response);
   }, []);
@@ -22,4 +22,4 @@ const TodoList: FC = () => {
   );
 };
 
-export default TodoList;
+export default Todo;
