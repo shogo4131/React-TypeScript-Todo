@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Card } from '@material-ui/core';
-import TodoItems from './TodoItems';
+import { Box, Grid } from '@material-ui/core';
+import { TodoItems, TodoInput } from './index';
 
 const Todo: React.VFC = () => {
   const [todo, setTodo] = useState([]);
@@ -12,13 +12,14 @@ const Todo: React.VFC = () => {
   }, []);
 
   return (
-    <Box mt={10}>
-      <Card>
+    <>
+      <Box mt={10}>
+        <TodoInput />
         {todo.map((todoItem, index) => (
           <TodoItems todoItems={todoItem} key={index} />
         ))}
-      </Card>
-    </Box>
+      </Box>
+    </>
   );
 };
 

@@ -1,13 +1,14 @@
 import React from 'react';
+import { CssBaseline } from '@material-ui/core';
 import { Header } from 'components/Header/index';
-
-import TodoList from './components/Todo/Todo';
+import { Todo } from './components/Todo/index';
 
 const App: React.VFC = () => {
   return (
     <>
+      <CssBaseline />
       <Header />
-      <TodoList />
+      <Todo />
     </>
   );
 };
