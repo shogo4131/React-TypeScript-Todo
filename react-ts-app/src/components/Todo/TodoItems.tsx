@@ -5,6 +5,7 @@ import { TodoList } from '../../types/Type';
 
 interface TodoListProps {
   todoItems: TodoList;
+  clickEdit: (id: number) => void;
   clickOpen: () => void;
 }
 
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const TodoItems: React.VFC<TodoListProps> = React.memo(
-  ({ todoItems, clickOpen }) => {
+  ({ todoItems, clickEdit, clickOpen }) => {
     const classes = useStyles();
 
     return (
@@ -32,7 +33,12 @@ const TodoItems: React.VFC<TodoListProps> = React.memo(
         <Grid item className={classes.item}>
           <Grid container spacing={1}>
             <Grid item>
-              <Button variant="contained" color="primary" size="small">
+              <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                onClick={() => clickEdit(todoItems.id)}
+              >
                 編集
               </Button>
             </Grid>

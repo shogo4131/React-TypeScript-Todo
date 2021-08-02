@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
     closeButton: {
       position: 'absolute',
       right: theme.spacing(0.5),
-      top: theme.spacing(0.5),
+      top: theme.spacing(1),
     },
   })
 );
@@ -38,8 +38,12 @@ const DeleteDialog: React.VFC<DialogProps> = React.memo(
     return (
       <Dialog open={open}>
         <DialogTitle className={classes.title}>
-          <Typography>削除確認</Typography>
-          <IconButton className={classes.closeButton} onClick={clickClose}>
+          <Typography variant="inherit">削除確認</Typography>
+          <IconButton
+            color="inherit"
+            className={classes.closeButton}
+            onClick={clickClose}
+          >
             <CloseIcon />
           </IconButton>
         </DialogTitle>
