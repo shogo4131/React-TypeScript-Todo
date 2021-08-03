@@ -1,11 +1,10 @@
-import React from 'react';
-import { Grid, Button } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Grid, Button, TextField } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { TodoList } from '../../types/Type';
 
 interface TodoListProps {
   todoItems: TodoList;
-  clickEdit: (id: number) => void;
   clickOpen: () => void;
 }
 
@@ -22,36 +21,72 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const TodoItems: React.VFC<TodoListProps> = React.memo(
-  ({ todoItems, clickEdit, clickOpen }) => {
+  ({ todoItems, clickOpen }) => {
     const classes = useStyles();
+
+    const [selectedTodo, setSelectedTodo] = useState('');
+
+    /* 編集ボタン押下 */
+    const clickEditButton = (todo: string) => setSelectedTodo(todo);
+
+    /* 編集内容入力検知 */
+    const changeEditInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+      console.log(e.target.value);
+    };
 
     return (
       <Grid container className={classes.root}>
         <Grid item className={classes.item}>
-          {todoItems.todo}
+          {selectedTodo === '' ? (
+            todoItems.todo
+          ) : (
+            <TextField
+              variant="outlined"
+              size="small"
+              defaultValue={selectedTodo}
+              onChange={changeEditInputHandler}
+            />
+          )}
         </Grid>
         <Grid item className={classes.item}>
           <Grid container spacing={1}>
-            <Grid item>
-              <Button
-                variant="contained"
-                color="primary"
-                size="small"
-                onClick={() => clickEdit(todoItems.id)}
-              >
-                編集
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button
-                variant="contained"
-                color="primary"
-                size="small"
-                onClick={clickOpen}
-              >
-                削除
-              </Button>
-            </Grid>
+            {selectedTodo === '' ? (
+              <>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    onClick={() => clickEditButton(todoItems.todo)}
+                  >
+                    編集
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    onClick={clickOpen}
+                  >
+                    削除
+                  </Button>
+                </Grid>
+              </>
+            ) : (
+              <>
+                <Grid item>
+                  <Button variant="contained" color="primary" size="small">
+                    更新
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button variant="contained" color="primary" size="small">
+                    戻る
+                  </Button>
+                </Grid>
+              </>
+            )}
           </Grid>
         </Grid>
       </Grid>

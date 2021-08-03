@@ -4,6 +4,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 interface InputProps {
   todoInput: string;
+  clickAdd: () => void;
   changeAddInput: React.ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const TodoInput: React.VFC<InputProps> = React.memo(
-  ({ todoInput, changeAddInput }) => {
+  ({ todoInput, clickAdd, changeAddInput }) => {
     const classes = useStyles();
 
     return (
@@ -32,7 +33,7 @@ const TodoInput: React.VFC<InputProps> = React.memo(
           />
         </Grid>
         <Grid item>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={clickAdd}>
             追加
           </Button>
         </Grid>
