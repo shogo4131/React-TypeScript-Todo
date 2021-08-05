@@ -15,6 +15,7 @@ import { DIALOG_TITLE_COLOR } from '../../constants/commonStyle';
 interface DialogProps {
   open: boolean;
   clickClose: () => void;
+  clickDelete: () => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const DeleteDialog: React.VFC<DialogProps> = React.memo(
-  ({ open, clickClose }) => {
+  ({ open, clickClose, clickDelete }) => {
     const classes = useStyles();
 
     return (
@@ -51,7 +52,12 @@ const DeleteDialog: React.VFC<DialogProps> = React.memo(
           <Typography>本当にこのTodoを削除しますか？</Typography>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" color="primary" size="small">
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            onClick={clickDelete}
+          >
             削除
           </Button>
         </DialogActions>

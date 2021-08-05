@@ -7,7 +7,7 @@ import { TodoList } from '../../types/Type';
 const Todo: React.VFC = () => {
   const [open, setOpen] = useState(false);
   const [todoInput, setTodoInput] = useState('');
-
+  const [deleteId, setDeleteId] = useState<number | null>(null);
   const [todo, setTodo] = useState<TodoList[]>([]);
 
   useEffect(() => {
@@ -30,10 +30,18 @@ const Todo: React.VFC = () => {
   }, []);
 
   /* 削除ボタン押下 */
-  const clickOpenButton = useCallback(() => setOpen(true), []);
+  const clickOpenButton = useCallback((id: number) => {
+    setOpen(true);
+    setDeleteId(id);
+  }, []);
 
   /* ×ボタン押下 */
   const clickCloseButton = useCallback(() => setOpen(false), []);
+
+  /* モーダル削除ボタン押下 */
+  const clickDeleteButton = useCallback(() => {
+    console.log(deleteId);
+  }, [deleteId]);
 
   return (
     <>
@@ -51,7 +59,11 @@ const Todo: React.VFC = () => {
           />
         ))}
       </Box>
-      <DeleteDialog open={open} clickClose={clickCloseButton} />
+      <DeleteDialog
+        open={open}
+        clickClose={clickCloseButton}
+        clickDelete={clickDeleteButton}
+      />
     </>
   );
 };

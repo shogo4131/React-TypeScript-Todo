@@ -5,7 +5,7 @@ import { TodoList } from '../../types/Type';
 
 interface TodoListProps {
   todoItems: TodoList;
-  clickOpen: () => void;
+  clickOpen: (id: number) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,9 +29,17 @@ const TodoItems: React.VFC<TodoListProps> = React.memo(
     /* 編集ボタン押下 */
     const clickEditButton = (todo: string) => setSelectedTodo(todo);
 
+    /* 戻るボタン押下 */
+    const clickBackButton = () => setSelectedTodo('');
+
+    /* 更新ボタン押下 */
+    const clickUpdateButton = () => {
+      console.log('update');
+    };
+
     /* 編集内容入力検知 */
     const changeEditInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(e.target.value);
+      setSelectedTodo(e.target.value);
     };
 
     return (
@@ -67,7 +75,7 @@ const TodoItems: React.VFC<TodoListProps> = React.memo(
                     variant="contained"
                     color="primary"
                     size="small"
-                    onClick={clickOpen}
+                    onClick={() => clickOpen(todoItems.id)}
                   >
                     削除
                   </Button>
@@ -76,12 +84,22 @@ const TodoItems: React.VFC<TodoListProps> = React.memo(
             ) : (
               <>
                 <Grid item>
-                  <Button variant="contained" color="primary" size="small">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    onClick={clickUpdateButton}
+                  >
                     更新
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button variant="contained" color="primary" size="small">
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    size="small"
+                    onClick={clickBackButton}
+                  >
                     戻る
                   </Button>
                 </Grid>
